@@ -1,5 +1,5 @@
 # Add Make commands here. 
-.PHONY: up down build rebuild logs restart shell
+.PHONY: up down build rebuild logs restart worker_shell worker_run shell_test_worker shell_test_worker_run test_dashboard
 
 # Allowed environments.
 ALLOWED_ENVS := prod test
@@ -43,7 +43,8 @@ logs:
 	$(COMPOSE_CMD) logs -f
 
 # Hard restart
-restart: down up
+restart: 
+	down up
 
 # Jump inside the container shell (replace 'app' with your service name)
 shell_test_worker:
@@ -51,3 +52,13 @@ shell_test_worker:
 
 shell_test_worker_run:
 	$(COMPOSE_CMD) exec test_worker $(CMD)
+
+worker_shell:
+	$(COMPOSE_CMD) exec worker bash
+
+worker_run:
+	$(COMPOSE_CMD) exec worker $(CMD)
+
+up_test_dashboard:
+	$(COMPOSE_CMD) up --build -d test_dashboard
+

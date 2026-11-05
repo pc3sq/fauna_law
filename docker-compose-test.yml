@@ -36,6 +36,16 @@ services:
     command: tail -f /dev/null
     networks:
       - legal_test_network
+  test_dashboard:
+    build:
+      context: .
+      dockerfile: dashboard.dockerfile
+    container_name: legal_test_dashboard
+    ports:
+      - "8080:80"
+    restart: always
+    networks:
+      - legal_test_network
 
 networks:
   legal_test_network:
