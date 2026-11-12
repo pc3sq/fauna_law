@@ -23,6 +23,11 @@ services:
     build:
       context: .
       dockerfile: worker.dockerfile
+    working_dir: /app
+    volumes:
+      - .:/app
+    env_file:
+      - .env
     container_name: legal_test_execution_node
     environment:
       - DATABASE_URL=postgresql://test_developer:test_secure_password_123@test_db:5432/legal_vault_sandbox
